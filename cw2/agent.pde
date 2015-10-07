@@ -2,6 +2,8 @@
 class Agent {
   int chill = 0;
 
+  Environment env;
+
   /* Direction the agent is facing, in radians; 0 radians faces down visually. */
   float heading;
 
@@ -15,15 +17,17 @@ class Agent {
   float posX;
   float posY;
 
-  Agent(float lzX, float lzY, float pow) {
+  Agent(Environment e, float lzX, float lzY, float pow) {
+    this.env = e;
     this.posX = lzX;
     this.posY = lzY;
     this.heading = 0;
-    this.power = pow
+    this.power = pow;
     this.throttle = 0;
   }
 
-  Agent() {
+  Agent(Environment e) {
+    this.env = e;
     this.posX = 0;
     this.posY = 0;
     this.heading = 0;
@@ -31,10 +35,18 @@ class Agent {
     this.throttle = 0;
   }
 
+  /* Change the throttle of the agent to throttle, a float between -1 and 1 inclusive */
   void setThrottle(float throttle) {
-    this.throttle = throttle;
+    if (throttle > 1) {
+      this.throttle = 1;
+    } else if (throttle < -1) {
+      this.throttle = -1;
+    } else {
+      this.throttle = throttle;
+    }
   }
 
+  /* Change the direction the agent is facing by radTurn radians */
   void rotate(float radTurn) {
     this.heading = (this.heading + radTurn) % TWO_PI;
     // redraw
@@ -47,4 +59,11 @@ class Agent {
     this.posY += this.power * this.throttle * cos(this.heading);
     // redraw
   }
+
+  /* Return the sensor reading for the agent's rotation. */
+  float senseGyro() {
+    return this.heading;
+  }
+
+  /* TODO: implement distance sensor */
 }

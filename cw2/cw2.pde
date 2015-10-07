@@ -18,6 +18,7 @@ void setup(){
         }
     }
     e = new Environment(m,tile_size);
+    // TODO: initialize timer
 }
 
 void draw(){
