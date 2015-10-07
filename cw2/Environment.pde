@@ -6,6 +6,7 @@ class Environment{
             for(int j=0; j<map[i].length; j++){
                 if(map[i][j].getWallStatus()){     fill(000000);}
                 else if(map[i][j].getGoalStatus()){fill(#00FF00);}
+                else{fill(#FFFFFF);}
                 rect(j*tile_size, i*tile_size, tile_size, tile_size);
             }
         }
