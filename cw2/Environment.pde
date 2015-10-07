@@ -1,6 +1,7 @@
 class Environment{
-    public Environment(Tile[][] map){
+    public Environment(Tile[][] map,float tile_size){
         this.map = map;
+        this.tile_size = tile_size;
         for(int i=0; i<map.length; i++){
             for(int j=0; j<map[i].length; j++){
                 if(map[i][j].getWallStatus()){     fill(000000);}
@@ -10,7 +11,7 @@ class Environment{
         }
     }
 
-    float tile_size = 40;
+    float tile_size;
     int agents;
     Tile[][] map;
 }
