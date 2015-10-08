@@ -36,16 +36,13 @@ class Agent {
   }
 
   void drawAgent() {
+    // set background to the map image
+    stroke(69);
     fill(69, 69, 69);
-    triangle(this.posX, this.posY, this.posX + 200, this.posY + 200, this.posX - 200, this.posY - 200);
-
+    triangle(this.posX, this.posY, this.posX + 100, this.posY + 100, this.posX - 100, this.posY - 100);
+    println("wax on");
   }
 
-  void undrawAgent() {
-    fill(255, 255, 255);
-    triangle(this.posX, this.posY, this.posX + 200, this.posY + 200, this.posX - 200, this.posY - 200);
-
-  }
   /* Change the throttle of the agent to throttle, a float between -1 and 1 inclusive */
   void setThrottle(float throttle) {
     if (throttle > 1) {
@@ -59,7 +56,6 @@ class Agent {
 
   /* Change the direction the agent is facing by radTurn radians */
   void rotate(float radTurn) {
-    this.undrawAgent();
     this.heading = (this.heading + radTurn) % TWO_PI;
     this.drawAgent();
   }
@@ -67,7 +63,6 @@ class Agent {
   /* Change the agent's position based on power, throttle, and heading.
    * The agent should drive on every tick. */
   void drive() {
-    this.undrawAgent();
     this.posX += this.power * this.throttle * sin(this.heading);
     this.posY += this.power * this.throttle * cos(this.heading);
     this.drawAgent();
@@ -88,7 +83,7 @@ class Agent {
     float yDiff = cos(heading) * resolution;
     float distDiff = sqrt(sq(sin(this.heading)) + sq(cos(this.heading)));
 
-    while (get(x, y) != 0) {
+    while (get((int)x, (int)y) != 0) {
       dist += distDiff;
       x += xDiff;
       y += yDiff;
