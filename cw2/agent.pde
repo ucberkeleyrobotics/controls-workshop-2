@@ -65,5 +65,21 @@ class Agent {
     return this.heading;
   }
 
-  /* TODO: implement distance sensor */
+  float senseDistance() {
+    float x = this.posX;
+    float y = this.posY;
+    float dist = 0;
+
+    float resolution = 0.01;
+    float xDiff = sin(heading) * resolution;
+    float yDiff = cos(heading) * resolution;
+    float distDiff = sqrt(sq(sin(this.heading)) + sq(cos(this.heading)));
+
+    while (get(x, y) != 0) {
+      dist += distDiff;
+      x += xDiff;
+      y += yDiff;
+    }
+    return dist;
+  }
 }
