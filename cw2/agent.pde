@@ -35,6 +35,17 @@ class Agent {
     this.throttle = 0;
   }
 
+  void drawAgent() {
+    fill(69, 69, 69);
+    triangle(this.posX, this.posY, this.posX + 200, this.posY + 200, this.posX - 200, this.posY - 200);
+
+  }
+
+  void undrawAgent() {
+    fill(255, 255, 255);
+    triangle(this.posX, this.posY, this.posX + 200, this.posY + 200, this.posX - 200, this.posY - 200);
+
+  }
   /* Change the throttle of the agent to throttle, a float between -1 and 1 inclusive */
   void setThrottle(float throttle) {
     if (throttle > 1) {
@@ -48,16 +59,18 @@ class Agent {
 
   /* Change the direction the agent is facing by radTurn radians */
   void rotate(float radTurn) {
+    this.undrawAgent();
     this.heading = (this.heading + radTurn) % TWO_PI;
-    // redraw
+    this.drawAgent();
   }
 
   /* Change the agent's position based on power, throttle, and heading.
    * The agent should drive on every tick. */
   void drive() {
+    this.undrawAgent();
     this.posX += this.power * this.throttle * sin(this.heading);
     this.posY += this.power * this.throttle * cos(this.heading);
-    // redraw
+    this.drawAgent();
   }
 
   /* Return the sensor reading for the agent's rotation. */
