@@ -2,8 +2,6 @@
 class Agent {
   int chill = 0;
 
-  Environment env;
-
   /* Direction the agent is facing, in radians; 0 radians faces down visually. */
   float heading;
 
@@ -26,7 +24,6 @@ class Agent {
   }
 
   Agent(Environment e) {
-    this.env = e;
     this.posX = 0;
     this.posY = 0;
     this.heading = 0;
@@ -35,11 +32,19 @@ class Agent {
   }
 
   void drawAgent() {
-    // set background to the map image
+    float h = this.heading;
+    float s = 10;
+    float x = posX;
+    float y = posY;
+
+    background(bg);
     stroke(69);
     fill(69, 69, 69);
-    triangle(this.posX, this.posY, this.posX + 100, this.posY + 100, this.posX - 100, this.posY - 100);
-    println("wax on");
+    triangle(
+      x + (2 * s) * sin(h), y + (2 * s) * cos(h),
+      x + s * sin(h + (TWO_PI / 3)), y + s * cos(h + (TWO_PI / 3)),
+      x + s * sin(h - (TWO_PI / 3)), y + s * cos(h - (TWO_PI / 3))
+    );
   }
 
   /* Change the throttle of the agent to throttle, a float between -1 and 1 inclusive */

@@ -17,5 +17,5 @@ void draw(){
     stroke(420);
     r.setThrottle(1);
     r.drive();
-    println(r.posX,r.posY);
+    r.rotate(radians(2));
 }
