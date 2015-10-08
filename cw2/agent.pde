@@ -17,8 +17,7 @@ class Agent {
   float posX;
   float posY;
 
-  Agent(Environment e, float lzX, float lzY, float pow) {
-    this.env = e;
+  Agent(float lzX, float lzY, float pow) {
     this.posX = lzX;
     this.posY = lzY;
     this.heading = 0;
