@@ -1,26 +1,28 @@
-
+int mapSize= 600;
 float tile_size = 2;
-Tile[][] m = new Tile[floor(200/tile_size)][floor(200/tile_size)];
+Tile[][] m = new Tile[floor(mapSize/tile_size)][floor(mapSize/tile_size)];
 Environment e;
+Agent r;
 
 void setup(){
-    size(200,200);
+    size(600,600);
     noStroke();
-    for(int i=0;i<m.length;i++){
-        for(int j=0;j<m[i].length;j++){
-            boolean x = j%2==0;
-            if(i==0 || i==m.length-1 || j==0 || j==m.length-1){
-                m[i][j] = new Tile(i,j,false,true);
-            }
-            else{
-                m[i][j] = new Tile(i,j,false,false);
-            }
-        }
-    }
+
     e = new Environment(m,tile_size);
+    e.fillEnv();
+    e.drawEnv();
+    r = new Agent(e);
+    r.rotate(radians(0));
     // TODO: initialize timer
 }
 
 void draw(){
-
+    fill(#0000FF);
+    stroke(420);
+    triangle(r.posX,r.posY,r.posX + 200, r.posY - 200, r.posX - 200, r.posY - 200);
+    stroke(0);
+    triangle(r.posX,r.posY,r.posX + 200, r.posY - 200, r.posX - 200, r.posY - 200);
+    r.setThrottle(1);
+    r.drive();
+    println(r.posX,r.posY);
 }
