@@ -7,15 +7,12 @@ void setup(){
 
     bg = loadImage("baseline.png");
     background(bg);
-    r = new Agent(300, 300, 1);
-    r.rotate(radians(0));
-    // TODO: initialize timer
+
+    r = new Agent(300, 300, 6);
+    r.rotate(radians(45));
+    r.setThrottle(1);
 }
 
 void draw(){
-    fill(#0000FF);
-    stroke(420);
-    r.setThrottle(1);
     r.drive();
-    r.rotate(radians(2));
 }

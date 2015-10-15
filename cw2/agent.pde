@@ -37,9 +37,20 @@ class Agent {
     float x = posX;
     float y = posY;
 
+
     background(bg);
     stroke(69);
     fill(69, 69, 69);
+    int theTip = get((int)(x + (2.17 * s) * sin(h)), (int)(y + (2.17 * s) * cos(h)));
+    if (theTip == -16777216) {
+      println("You crashed!");
+      delay(2000);
+      exit();
+    } else if (theTip == -16711936) {
+      println("You made it!");
+      delay(2000);
+      exit();
+    }
     triangle(
       x + (2 * s) * sin(h), y + (2 * s) * cos(h),
       x + s * sin(h + (TWO_PI / 3)), y + s * cos(h + (TWO_PI / 3)),
@@ -78,16 +89,16 @@ class Agent {
   }
 
   float senseDistance() {
-    float x = this.posX;
-    float y = this.posY;
+    float x = this.posX + (2.2 * 10) * sin(this.heading);
+    float y = this.posY + (2.2 * 10) * cos(this.heading);
     float dist = 0;
 
     float resolution = 0.01;
-    float xDiff = sin(heading) * resolution;
-    float yDiff = cos(heading) * resolution;
-    float distDiff = sqrt(sq(sin(this.heading)) + sq(cos(this.heading)));
+    float xDiff = sin(this.heading) * resolution;
+    float yDiff = cos(this.heading) * resolution;
+    float distDiff = sqrt(sq(xDiff) + sq(yDiff));
 
-    while (get((int)x, (int)y) != 0) {
+    while (get((int)x, (int)y) != -16777216) {
       dist += distDiff;
       x += xDiff;
       y += yDiff;
